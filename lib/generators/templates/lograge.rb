@@ -16,7 +16,8 @@ Rails.application.configure do
       ip: event.payload[:ip],
       host: event.payload[:host],
       user_agent: event.payload[:user_agent],
-      masquerading_user: event.payload[:masquerading_user]
+      masquerading_user: event.payload[:masquerading_user],
+      order: event.payload[:order]
     }
   end
 end
