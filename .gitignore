@@ -13,3 +13,6 @@
 
 # bundler's vendorized gem installs
 /vendor
+
+# Solidus dummy app for testing
+/spec/dummy
