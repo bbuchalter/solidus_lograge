@@ -9,7 +9,9 @@ begin
 
   RSpec::Core::RakeTask.new(:spec)
 
-  task default: %i(first_run spec)
+  RuboCop::RakeTask.new
+
+  task default: %i(first_run rubocop spec)
 rescue LoadError => e
   puts e.inspect
 end
