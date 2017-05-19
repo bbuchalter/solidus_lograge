@@ -1,0 +1,17 @@
+# https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html
+filebeat.prospectors:
+- input_type: log
+  paths:
+    - ${ESLOGPATH}
+  document_type: json
+  json.add_error_key: true
+
+# https://www.elastic.co/guide/en/beats/filebeat/current/elasticsearch-output.html
+output.elasticsearch:
+  hosts: ["${ESHOST}"]
+  protocol: "https"
+  username: ${ESUSER}
+  password: ${ESPASS}
+  index: "solidus_lograge_%{+yyyy.MM.dd}"
+  template:
+    enabled: false
