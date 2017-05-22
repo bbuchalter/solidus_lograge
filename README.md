@@ -81,12 +81,13 @@ a sample Filebeat client configuration file:
 
 2. Setup environment variables needed by the client:
 ```
-export ESLOGPATH=$HOME/solidus_lograge/spec/dummy/log/lograge_development.log
+cd solidus_lograge
+export ESLOGPATH=`pwd`/spec/dummy/log/lograge_development.log
 ```
 
 3. Run filebeat locally with the sample config:
 ```
-filebeat -e -c $HOME/solidus_lograge/solidus_lograge.filebeat.config.yml
+filebeat -e -c `pwd`/solidus_lograge.filebeat.config.yml
 ```
 
 With the filebeat client running, now execute some requests against localhost:3000.
