@@ -9,9 +9,9 @@ filebeat.prospectors:
 # https://www.elastic.co/guide/en/beats/filebeat/current/elasticsearch-output.html
 output.elasticsearch:
   hosts: ["${ESHOST}"]
-  protocol: ${ESPROTO}
-  username: ${ESUSER}
-  password: ${ESPASS}
+  protocol: ${ESPROTO:https}
+  username: ${ESUSER:}
+  password: ${ESPASS:}
   index: "solidus_lograge_%{+yyyy.MM.dd}"
   template:
     enabled: false
