@@ -97,6 +97,17 @@ export FILEBEAT_CONFIG=`pwd`/solidus_lograge.filebeat.config.yml
 ./filebeat -e -c $FILEBEAT_CONFIG
 ```
 
+You may see an error that looks like this:
+```
+ERR Error decoding JSON: invalid character '#' looking for beginning of value
+```
+
+This error is safe to ignore. It's caused by the default output of the ActiveLogger
+which is added to the top of each new log file:
+```
+# Logfile created on 2017-05-22 14:46:51 +0100 by logger.rb/56438
+```
+
 With the filebeat client running, now execute some requests against localhost:3000.
 After about 30 seconds, the filebeat clinet will start sending the log data
 and you'll see a message that looks like this:
