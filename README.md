@@ -55,6 +55,7 @@ This repo includes a sample index template:
 
 To use this script setup a few environment variables:
 ```
+export ESPROTO=https # switch to 'http' if needed
 export ESHOST= # the hostname and port of the ElasticSearch cluster
 export ESUSER= # the cluster user name
 export ESPASS=
@@ -62,7 +63,7 @@ export ESPASS=
 
 You can use the ElasticSearch API to easily "install" this template:
 ```
-curl https://raw.githubusercontent.com/bbuchalter/solidus_lograge/master/solidus_lograge.elasticsearch_index_template.json | curl -H "Content-Type: application/json" -XPUT "https://$ESHOST/_template/solidus_lograge" -u $ESUSER:$ESPASS -d@-
+curl https://raw.githubusercontent.com/bbuchalter/solidus_lograge/master/solidus_lograge.elasticsearch_index_template.json | curl -H "Content-Type: application/json" -XPUT "$ESPROTO://$ESHOST/_template/solidus_lograge" -u $ESUSER:$ESPASS -d@-
 ```
 
 This script:
@@ -105,7 +106,7 @@ INFO Non-zero metrics in the last 30s: filebeat.harvester.open_files=1....
 
 You can verify you've created a new index for this data with this command:
 ```
-curl -XGET "https://$ESHOST/_cat/indices" -u $ESUSER:$ESPASS
+curl -XGET "$ESPROTO://$ESHOST/_cat/indices" -u $ESUSER:$ESPASS
 ```
 
 You should see an index that starts with `solidus_lograge`.
