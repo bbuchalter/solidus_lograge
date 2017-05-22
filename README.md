@@ -109,7 +109,7 @@ which is added to the top of each new log file:
 ```
 
 With the filebeat client running, now execute some requests against localhost:3000.
-After about 30 seconds, the filebeat clinet will start sending the log data
+After about 30 seconds, the filebeat client will start sending the log data
 and you'll see a message that looks like this:
 ```
 INFO Harvester started for file: ....
