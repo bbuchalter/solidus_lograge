@@ -53,6 +53,13 @@ defined in ElasticSearch so each index has the data processed in the same way.
 This repo includes a sample index template:
 `solidus_lograge.elasticsearch_index_template.json`
 
+To use this script setup a few environment variables:
+```
+export ESHOST= # the hostname and port of the ElasticSearch cluster
+export ESUSER= # the cluster user name
+export ESPASS=
+```
+
 You can use the ElasticSearch API to easily "install" this template:
 ```
 curl https://raw.githubusercontent.com/bbuchalter/solidus_lograge/master/solidus_lograge.elasticsearch_index_template.json | curl -H "Content-Type: application/json" -XPUT "https://$ESHOST/_template/solidus_lograge" -u $ESUSER:$ESPASS -d@-
@@ -61,10 +68,6 @@ curl https://raw.githubusercontent.com/bbuchalter/solidus_lograge/master/solidus
 This script:
 1. GET the sample template via CURL and pipe it to a...
 2. PUT request to ElasticSearch to create a new template called `solidus_lograge`
-
-`$ESHOST` should be the hostname and port of the ElasticSearch cluster.
-`$ESUSER` should be the user name (`elastic` by default)
-`$ESPASS` should be the password
 
 After a successful execution, you should see:
 ```
@@ -77,17 +80,19 @@ to ElasticSearch. The simplest way to do this is with Filebeat. This repo includ
 a sample Filebeat client configuration file:
 `solidus_lograge.filebeat.config.yml`
 
-1. [Download filebeat locally](https://www.elastic.co/downloads/beats/filebeat)
-
-2. Setup environment variables needed by the client:
+1. Setup environment variables needed by the filebeat client:
 ```
 cd solidus_lograge
 export ESLOGPATH=`pwd`/spec/dummy/log/lograge_development.log
+export FILEBEAT_CONFIG=`pwd`/solidus_lograge.filebeat.config.yml
 ```
+
+2. [Download filebeat binary](https://www.elastic.co/downloads/beats/filebeat), not DEB/RPM
 
 3. Run filebeat locally with the sample config:
 ```
-filebeat -e -c `pwd`/solidus_lograge.filebeat.config.yml
+# switch to path for extacted filebeat binary
+./filebeat -e -c $FILEBEAT_CONFIG
 ```
 
 With the filebeat client running, now execute some requests against localhost:3000.
