@@ -1,4 +1,5 @@
 require "rails"
+require "active_support/core_ext"
 require "lograge"
 require "lograge/railtie"
 
