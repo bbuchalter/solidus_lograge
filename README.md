@@ -53,7 +53,7 @@ creation since each day of log data will get its own index.
 Since each day of log data will get its own index, we need an index template
 defined in ElasticSearch so each index has the data processed in the same way.
 This repo includes a sample index template:
-`solidus_lograge.elasticsearch_index_template.json`
+[solidus_lograge.elasticsearch_index_template.json](/solidus_lograge.elasticsearch_index_template.json).
 
 To use this script setup a few environment variables:
 ```
@@ -81,7 +81,7 @@ After a successful execution, you should see:
 Now that we have log data and an index template, we can start shipping log data
 to ElasticSearch. The simplest way to do this is with Filebeat. This repo includes
 a sample Filebeat client configuration file:
-`solidus_lograge.filebeat.config.yml`
+[solidus_lograge.filebeat.config.yml](/solidus_lograge.filebeat.config.yml).
 
 1. Setup environment variables needed by the filebeat client:
 ```
