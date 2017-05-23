@@ -97,7 +97,17 @@ export FILEBEAT_CONFIG=`pwd`/solidus_lograge.filebeat.config.yml
 ./filebeat -e -c $FILEBEAT_CONFIG
 ```
 
-You may see an error that looks like this:
+### Reviewing Filebeat output
+You should see an outline line that looks like this:
+```
+INFO Harvester started for file:.....
+```
+
+The absence of this line means you need to check the value of $ESLOGPATH and
+ensure log file data is being written there.
+
+
+You will see an error that looks like this:
 ```
 ERR Error decoding JSON: invalid character '#' looking for beginning of value
 ```
@@ -112,16 +122,17 @@ With the filebeat client running, now execute some requests against localhost:30
 After about 30 seconds, the filebeat client will start sending the log data
 and you'll see a message that looks like this:
 ```
-INFO Harvester started for file: ....
 INFO Non-zero metrics in the last 30s: filebeat.harvester.open_files=1....
 ```
 
+### Validating you've created an index and written documents
 You can verify you've created a new index for this data with this command:
 ```
-curl -XGET "$ESPROTO://$ESHOST/_cat/indices" -u $ESUSER:$ESPASS
+curl -XGET "$ESPROTO://$ESHOST/_cat/indices?v" -u $ESUSER:$ESPASS
 ```
 
-You should see an index that starts with `solidus_lograge`.
+You should see an index that starts with `solidus_lograge` and a reasonable
+document count in the index based on how many requests you've made to localhost:3000.
 
 ## Use Kibana to Explore Logs
 Kibana is a visualization tool that makes it easy to search and filter data in
