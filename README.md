@@ -34,6 +34,10 @@ and see the log output. You can customize the data included in this log file
 by modifying `config/initializers/lograge.rb` which is based on the
 [generator in this repo](/lib/generators/templates/lograge.rb).
 
+You may also need to modify [SolidusLograge::AppendPayload](/lib/solidus_lograge/append_payload.rb)
+to add data to the payload for the logger. This module is included in
+[ApplicationController as a decorator](https://github.com/bbuchalter/solidus_lograge/blob/master/app/controllers/application_controller_decorator.rb).
+
 ## ElasticSearch Cluster Setup
 If you've got an existing ElasticSearch cluster, you can skip this section.
 
