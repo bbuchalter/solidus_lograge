@@ -30,7 +30,8 @@ tail -f lograge_development.log
 
 With the sample store up and running, you can visit http://localhost:3000
 and see the log output. You can customize the data included in this log file
-by modifying `config/initializers/lograge.rb`.
+by modifying `config/initializers/lograge.rb` which is based on the
+[generator in this repo](/lib/generators/templates/lograge.rb).
 
 ## ElasticSearch Cluster Setup
 If you've got an existing ElasticSearch cluster, you can skip this section.
