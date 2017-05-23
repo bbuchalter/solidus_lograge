@@ -87,16 +87,19 @@ to ElasticSearch. The simplest way to do this is with Filebeat. This repo includ
 a sample Filebeat client configuration file:
 [solidus_lograge.filebeat.config.yml](/solidus_lograge.filebeat.config.yml).
 
-1. Setup environment variables needed by the filebeat client:
+1. [Download filebeat binary](https://www.elastic.co/downloads/beats/filebeat), not DEB/RPM
+2. Setup environment variables needed by the filebeat client:
 ```
 cd solidus_lograge
 export ESLOGPATH=`pwd`/spec/dummy/log/lograge_development.log
 export FILEBEAT_CONFIG=`pwd`/solidus_lograge.filebeat.config.yml
 ```
-
-2. [Download filebeat binary](https://www.elastic.co/downloads/beats/filebeat), not DEB/RPM
-
-3. Run filebeat locally with the sample config:
+3. Verify no indices exist before starting filebeat, so you can be confident that
+it was in fact the act of starting filebeat which created the index.
+```
+curl -XGET "$ESPROTO://$ESHOST/_cat/indices?v" -u $ESUSER:$ESPASS
+```
+4. Run filebeat locally:
 ```
 # switch to path for extacted filebeat binary
 ./filebeat -e -c $FILEBEAT_CONFIG
@@ -130,7 +133,7 @@ and you'll see a message that looks like this:
 INFO Non-zero metrics in the last 30s: filebeat.harvester.open_files=1....
 ```
 
-### Validating you've created an index and written documents
+### Validating Index Creation
 You can verify you've created a new index for this data with this command:
 ```
 curl -XGET "$ESPROTO://$ESHOST/_cat/indices?v" -u $ESUSER:$ESPASS
