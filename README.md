@@ -18,7 +18,8 @@ cd solidus_lograge
 bundle install
 bundle exec rake test_app
 cd spec/dummy
-bin/rake db:migrate db:seed spree_sample:load
+bin/rake db:migrate db:seed
+bin/rake spree_sample:load
 bin/rails server
 ```
 
