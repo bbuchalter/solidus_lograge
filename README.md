@@ -7,6 +7,7 @@ the repo includes a sample filebeat configuration file to let you ship your logs
 to ElasticSearch.
 
 # The Demo
+You can view the accompaning [slides](https://docs.google.com/presentation/d/1Q7aKaNMzff6ktxB4t0kiUm4ZOCvm2OzzhKPNKWCf3Ns/edit?usp=sharing) that go along with this repo. Video soon come!
 
 ## Logging
 Since this repo is intended primarly as a demonstration, we'll be using the
